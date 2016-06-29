@@ -486,19 +486,22 @@ public class MYOVRDebugInfo : MonoBehaviour
 				try {
 					sPort.DiscardInBuffer ();
 					string rawData = sPort.ReadLine ();
-					char delimiter = ',';
-					string[] distancestrings = rawData.Split (delimiter);
-					double[] dist = new double[distancestrings.Length];
-					for (int i = 0; i < distancestrings.Length; ++i) {	//converts each string in the array to a double
-						dist [i] = double.Parse (distancestrings [i]);
+					if (rawData.Length > 2){
+						char delimiter = ',';
+						string[] distancestrings = rawData.Split (delimiter);
+						double[] dist = new double[distancestrings.Length];
+						for (int i = 0; i < distancestrings.Length-1; i++) {	//converts each string in the array to a double
+							dist [i] = double.Parse (distancestrings [i]);
+
+						}
+						double distance1 = dist [0] / 1000;
+						double distance2 = dist [1] / 1000;
+						double distance3 = dist [2] / 1000;
+				
+						UpdateSensor1 (distance1);
+						UpdateSensor2 (distance2);
+						UpdateSensor3 (distance3);
 					}
-					double distance1 = dist [0] / 100;
-					double distance2 = dist [1] / 100;
-					double distance3 = dist [2] / 100;
-			
-					UpdateSensor1 (distance1);
-					UpdateSensor2 (distance2);
-					UpdateSensor3 (distance3);
 				} catch (System.Exception) {
 				}
 			}
