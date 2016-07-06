@@ -33,6 +33,8 @@ public class MYOVRDebugInfo : MonoBehaviour
 {
 	SerialPort sPort = new SerialPort("COM8", 9600);
 
+	public KartController kart;
+
     #region GameObjects for Debug Information UIs   
     GameObject debugUIManager;
     GameObject debugUIObject;

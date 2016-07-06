@@ -3,6 +3,8 @@ using System.Collections;
 
 public class KartController : MonoBehaviour {
 
+	public bool showItem = false;
+
 	
 	void Start ()
 	{
@@ -15,6 +17,7 @@ public class KartController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag ("Item Box"))
 		{
+			showItem = true;
 			StartCoroutine(respawn(other,7));
 		}
 	}
