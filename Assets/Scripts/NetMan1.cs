@@ -255,7 +255,7 @@ public class NetMan1 : MonoBehaviour {
 
         dataV.y = 1.72f;
         transform.position = dataV;
-
+   
         Vector3 dataEuler = dataQ.eulerAngles;
         dataEuler.x = dataEuler.z = 0f;
         dataQ = Quaternion.Euler(dataEuler);
