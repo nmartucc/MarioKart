@@ -27,8 +27,8 @@ public class NetMan1 : MonoBehaviour {
 	Quaternion oldQ = Quaternion.identity;
 	Vector3 newV = Vector3.zero;
 	Quaternion newQ = Quaternion.identity;
-	public Vector3 dataV;
-	public Quaternion dataQ;
+	public static Vector3 dataV;
+	public static Quaternion dataQ;
 	
 
 	// Use this for initialization
@@ -253,5 +253,13 @@ public class NetMan1 : MonoBehaviour {
 				break;
 		}
 
-	}
+        dataV.y = 1.72f;
+        transform.position = dataV;
+
+        Vector3 dataEuler = dataQ.eulerAngles;
+        dataEuler.x = dataEuler.z = 0f;
+        dataQ = Quaternion.Euler(dataEuler);
+        transform.rotation = dataQ;
+        
+    }
 }

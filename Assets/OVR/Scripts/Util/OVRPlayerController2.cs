@@ -94,8 +94,6 @@ public class OVRPlayerController2 : MonoBehaviour
 	private bool prevHatRight = false;
 	private float SimulationRate = 60f;
 
-	public NetMan1 net;
-
 	void Start()
 	{
 		// Add eye-depth as a camera offset from the player controller
@@ -216,14 +214,14 @@ public class OVRPlayerController2 : MonoBehaviour
 		// -----------------------------------------------------------
 
 		// fetch the incoming data
-		Vector3 dataV = net.dataV;
+		Vector3 dataV = NetMan1.dataV;
 		//Debug.Log (net.dataV.ToString ());
 
 		// set the height to fixed
-		dataV.y = 1.72f;
+		//dataV.y = 1.72f;
 
 		// set the global transform to the received data
-		transform.position = dataV;
+		//transform.position = dataV;
 		//Debug.Log (transform.position.ToString ());
 
 		UpdateMovement();
@@ -250,7 +248,7 @@ public class OVRPlayerController2 : MonoBehaviour
 		if (HaltUpdateMovement)
 			return;
 
-		/*bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
+        /*bool moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
 		bool moveLeft = Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow);
 		bool moveRight = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
 		bool moveBack = Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
@@ -357,10 +355,10 @@ public class OVRPlayerController2 : MonoBehaviour
 
 		euler.y += rightAxisX * rotateInfluence;*/
 
-		//transform.rotation = Quaternion.Euler(euler);
-		//transform.rotation = net.dataQ;
+        //transform.rotation = Quaternion.Euler(euler);
+        //transform.rotation = NetMan1.dataQ;
 
-		Vector3 dataEuler = net.dataQ.eulerAngles;
+        Vector3 dataEuler = Vector3.zero;// - NetMan1.dataQ.eulerAngles;
 		dataEuler.x = dataEuler.z = 0f;
 		Quaternion dataQ = Quaternion.Euler (dataEuler); 
 		transform.rotation = dataQ;

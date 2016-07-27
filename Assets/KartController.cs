@@ -4,14 +4,11 @@ using System.Collections;
 public class KartController : MonoBehaviour {
 
 	public bool showItem = false;
-
 	
 	void Start ()
 	{
 
 	}
-	
-
 	
 	void OnTriggerEnter(Collider other) 
 	{
