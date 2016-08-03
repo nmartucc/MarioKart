@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{D1D7F868-8655-1A17-EBCF-9CFC28DDB731}") = "MarioKart", "Assembly-CSharp-firstpass.csproj", "{77F14010-B0D4-BCC3-396A-E1BD16A0BB8C}"
+EndProject
+Project("{D1D7F868-8655-1A17-EBCF-9CFC28DDB731}") = "MarioKart", "Assembly-CSharp.csproj", "{FC464817-F035-C662-7E8C-713824400579}"
+EndProject
+Project("{D1D7F868-8655-1A17-EBCF-9CFC28DDB731}") = "MarioKart", "Assembly-CSharp-Editor.csproj", "{E339BF42-0B81-0FB7-BAB9-3EECE7643FA3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{77F14010-B0D4-BCC3-396A-E1BD16A0BB8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F14010-B0D4-BCC3-396A-E1BD16A0BB8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F14010-B0D4-BCC3-396A-E1BD16A0BB8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F14010-B0D4-BCC3-396A-E1BD16A0BB8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC464817-F035-C662-7E8C-713824400579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC464817-F035-C662-7E8C-713824400579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC464817-F035-C662-7E8C-713824400579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC464817-F035-C662-7E8C-713824400579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E339BF42-0B81-0FB7-BAB9-3EECE7643FA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E339BF42-0B81-0FB7-BAB9-3EECE7643FA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E339BF42-0B81-0FB7-BAB9-3EECE7643FA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E339BF42-0B81-0FB7-BAB9-3EECE7643FA3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
