@@ -6,17 +6,22 @@ public class KartController : MonoBehaviour {
 
 	public bool showItem = false;
 	SerialPort sPort = new SerialPort("COM8", 9600);
-	public static double speed = 1;
+	public static double speed = 100;
 	
 	void Start ()
 	{
 		sPort.Open ();
 	}
+
+    void Update()
+    {
+        Debug.Log(speed);
+    }
 		
 	void OnTriggerEnter(Collider other) 
 	{
 		if (other.gameObject.CompareTag ("Off Road")) {
-			speed = 0.5;
+			speed = 50;
 			if (sPort.IsOpen) {
 				sPort.WriteLine (speed + ",");
 			}
@@ -30,7 +35,7 @@ public class KartController : MonoBehaviour {
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag("Off Road")){
-			speed = 1;
+			speed = 100;
 			if (sPort.IsOpen) {
 				sPort.WriteLine (speed + ",");
 			}
