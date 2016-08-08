@@ -31,7 +31,7 @@ using System.Threading;
 /// </summary>
 public class MYOVRDebugInfo : MonoBehaviour
 {
-	SerialPort sPort = new SerialPort("COM8", 9600);
+    SerialPort sPort = PortMan.sPort;
 
 	public KartController kart;
 
@@ -210,7 +210,6 @@ public class MYOVRDebugInfo : MonoBehaviour
     }
 
 	void Start(){
-		sPort.Open ();
 		Thread mythread = new Thread (new ThreadStart (UpdateSensors));
 		mythread.Start ();
 	}
@@ -496,9 +495,9 @@ public class MYOVRDebugInfo : MonoBehaviour
 							dist [i] = double.Parse (distancestrings [i]);
 
 						}
-						double distance1 = dist [0] / 1000;
-						double distance2 = dist [1] / 1000;
-						double distance3 = dist [2] / 1000;
+						double distance1 = dist [0] / 100;
+						double distance2 = dist[2] / 100;
+                        double distance3 = dist[1] / 100;
 				
 						UpdateSensor1 (distance1);
 						UpdateSensor2 (distance2);
