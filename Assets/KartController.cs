@@ -5,26 +5,24 @@ using System.IO.Ports;
 public class KartController : MonoBehaviour {
 
 	public bool showItem = false;
-	SerialPort sPort = new SerialPort("COM8", 9600);
-	public static double speed = 100;
+	SerialPort sPort = new SerialPort("COM8", 115200);
+	public static int speed = 100;
 	
 	void Start ()
 	{
 		sPort.Open ();
 	}
 
-    void Update()
-    {
-        Debug.Log(speed);
-    }
-		
+	void Update()
+	{
+		Debug.Log (speed);
+	}
+
 	void OnTriggerEnter(Collider other) 
 	{
 		if (other.gameObject.CompareTag ("Off Road")) {
-			speed = 50;
-			if (sPort.IsOpen) {
-				sPort.WriteLine (speed + ",");
-			}
+			speed = 25;
+			slow ();
 		}
 		else if (other.gameObject.CompareTag ("Item Box")) {
 			showItem = true;
@@ -47,6 +45,15 @@ public class KartController : MonoBehaviour {
 		obj.gameObject.SetActive (false);
 		yield return new WaitForSeconds(respawnTime);
 		obj.gameObject.SetActive (true);
+	}
+
+	IEnumerator slow()
+	{
+		if (sPort.IsOpen) {
+			sPort.WriteLine (1 + ",");
+			yield return new WaitForSeconds((float)0.5);
+			sPort.WriteLine (speed + ",");
+		}
 	}
 
 	void OnApplicationQuit(){
