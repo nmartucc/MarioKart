@@ -5,9 +5,12 @@ using System.IO.Ports;
 public class KartController : MonoBehaviour {
 
 	public bool showItem = false;
-    SerialPort sPort = PortMan.sPort;
+	SerialPort sPort = PortMan.sPort;
 	public static int speed = 100;
-    int count = 0;
+    
+	void Update(){
+		Debug.Log (speed);
+	}
 
 	void OnTriggerEnter(Collider other) 
 	{
