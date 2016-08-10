@@ -31,8 +31,6 @@ using System.Threading;
 /// </summary>
 public class MYOVRDebugInfo : MonoBehaviour
 {
-    SerialPort sPort = PortMan.sPort;
-
 	public KartController kart;
 
     #region GameObjects for Debug Information UIs   
@@ -483,29 +481,16 @@ public class MYOVRDebugInfo : MonoBehaviour
 
 	void UpdateSensors(){
 		while (shouldexit == false) {
-			if (sPort.IsOpen) {
-				try {
-					sPort.DiscardInBuffer ();
-					string rawData = sPort.ReadLine ();
-					if (rawData.Length > 2){
-						char delimiter = ',';
-						string[] distancestrings = rawData.Split (delimiter);
-						double[] dist = new double[distancestrings.Length];
-						for (int i = 0; i < distancestrings.Length-1; i++) {	//converts each string in the array to a double
-							dist [i] = double.Parse (distancestrings [i]);
-
-						}
-						double distance1 = dist [0] / 100;
-						double distance2 = dist[2] / 100;
-                        double distance3 = dist[1] / 100;
-				
-						UpdateSensor1 (distance1);
-						UpdateSensor2 (distance2);
-						UpdateSensor3 (distance3);
-					}
-				} catch (System.Exception) {
-				}
-			}
+            double[] dist = PortMan.Read();
+            if (dist != null)
+            {
+                double distance1 = dist[0] / 100;
+                double distance2 = dist[2] / 100;
+                double distance3 = dist[1] / 100;
+                UpdateSensor1(distance1);
+                UpdateSensor2(distance2);
+                UpdateSensor3(distance3);
+            }
 		}
 	}
 
@@ -735,8 +720,9 @@ public class MYOVRDebugInfo : MonoBehaviour
     }
     #endregion
 
-	void OnApplicationQuit(){
-		sPort.Close();
-		shouldexit = true;
-	}
+    void OnApplicationQuit()
+    {
+        shouldexit = true;
+    }
+
 }

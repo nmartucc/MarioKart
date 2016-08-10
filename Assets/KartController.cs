@@ -4,18 +4,14 @@ using System.IO.Ports;
 
 public class KartController : MonoBehaviour {
 
-	public bool showItem = false;
-	SerialPort sPort = PortMan.sPort;
+	private bool showItem = false;
 	private static int speed = 100;
 
 	void OnTriggerEnter(Collider other) 
 	{
 		if (other.gameObject.CompareTag ("Off Road")) {
-			speed = 25;
-            if (sPort.IsOpen)
-            {
-                sPort.WriteLine(speed + ",");
-            }
+			speed = 50;
+            PortMan.Write(speed);
         }
 		else if (other.gameObject.CompareTag ("Item Box")) {
 			showItem = true;
@@ -27,10 +23,8 @@ public class KartController : MonoBehaviour {
 	{
 		if (other.gameObject.CompareTag("Off Road")){
 			speed = 100;
-			if (sPort.IsOpen) {
-				sPort.WriteLine (speed + ",");
-			}
-		}
+            PortMan.Write(speed);
+        }
 	}
 
 	IEnumerator respawn(Collider obj,float respawnTime)
@@ -39,10 +33,5 @@ public class KartController : MonoBehaviour {
 		yield return new WaitForSeconds(respawnTime);
 		obj.gameObject.SetActive (true);
 	}
-
-	void OnApplicationQuit(){
-		sPort.Close();
-	}
-
 
 }
