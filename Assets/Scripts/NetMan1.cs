@@ -11,7 +11,6 @@ public class NetMan1 : MonoBehaviour {
 	private int myReliableChannelId;
 	private string strSocketConnOpen = "Socket open. SocketID: ";
 	private string strConnToServ = "Connected to server. ConnectionID: ";
-	//private string msg = "hello";
 
 	public int maxConnections = 10;
 	public int socketId;
@@ -23,11 +22,11 @@ public class NetMan1 : MonoBehaviour {
 	public GameObject cam;
 	private int count = 0;
 	private Boolean isVector = false;
-	Vector3 oldV = Vector3.zero;
-	Quaternion oldQ = Quaternion.identity;
 	Vector3 newV = Vector3.zero;
 	Quaternion newQ = Quaternion.identity;
+	// position data
 	public static Vector3 dataV;
+	// rotation data
 	public static Quaternion dataQ;
 	
 
@@ -54,66 +53,6 @@ public class NetMan1 : MonoBehaviour {
 		DebugConsole.Log (strConnToServ + connectionId);
 	}
 
-	/*
-	public void OnGUI()
-	{
-		GUILayout.BeginHorizontal ();
-		ipAddress = GUILayout.TextField (ipAddress);
-		GUILayout.Label("IP Address");
-		GUILayout.EndHorizontal ();
-		
-		GUILayout.BeginHorizontal ();
-		string tempPort;
-		tempPort = GUILayout.TextField (socketPort.ToString ());
-		socketPort = int.Parse (tempPort);
-		GUILayout.Label ("Port");
-		GUILayout.EndHorizontal ();
-
-		if (GUILayout.Button ("Connect")) 
-		{
-			Debug.Log("Connecting....");
-			DebugConsole.Log ("Connecting....");
-			Connect();
-		}
-
-
-		GUILayout.BeginHorizontal ();
-		/*string tempMsg;
-		tempMsg = GUILayout.TextField("Enter message here");
-		msg = tempMsg;
-		GUILayout.Label("Message");
-		GUILayout.EndHorizontal ();
-
-		if (GUILayout.Button ("Send Message")) 
-		{
-			Debug.Log("Sending message...");
-			Debug.Log (isVector);
-			DebugConsole.Log("Sending message...");
-			//SendVector3 (cam.transform.position);
-			//SendQuaternion (cam.transform.rotation);
-		}
-		 
-	}
-	*/
-
-	/*
-	public void SendSocketMessage(string msg) 
-	{
-		byte error;
-		byte[] buffer = new byte[bufferSize];
-		Stream stream = new MemoryStream (buffer);
-		BinaryFormatter formatter = new BinaryFormatter ();
-		formatter.Serialize (stream, msg);
-
-		NetworkTransport.Send (socketId, 
-		                       connectionId, 
-		                       myReliableChannelId, 
-		                       buffer, 
-		                       bufferSize, 
-		                       out error);
-
-	}*/
-
 	public void SendVector3(Vector3 msg) 
 	{
 		byte error;
@@ -126,7 +65,6 @@ public class NetMan1 : MonoBehaviour {
 		int netw = IPAddress.HostToNetworkOrder (10000*10000);
 		this.isVector = true;
 		int[] data = {netx,nety,netz,netw};
-		//DebugConsole.Log (data[1].ToString());
 		formatter.Serialize (stream, data);
 		
 		NetworkTransport.Send (socketId, 
@@ -216,32 +154,15 @@ public class NetMan1 : MonoBehaviour {
 				float tempz = IPAddress.NetworkToHostOrder (message[2])/10000.0f;
 				float tempw = IPAddress.NetworkToHostOrder (message[3])/10000.0f;
 				float boolCheck = tempw - 1;
+			// if incoming data is Vector3
 			if( boolCheck == 9999 ){
-				//Debug.Log ("Vector");
-				//DebugConsole.Log ("Vector");
 				newV = new Vector3(tempx, tempy, tempz);
-				//dataV = newV - oldV;
-				//oldV = newV;
-				dataV = newV;	
+				dataV = newV;
+			// else incoming data is Quaternion
 			}else{
-				//Debug.Log ("Quaternion");
-				//DebugConsole.Log ("Quaternion");
 				newQ = new Quaternion(tempx, tempy, tempz, tempw);
 				dataQ = newQ;
-				//oldQ = newQ;
 			}
-
-			/*
-				Debug.Log (isVector);
-				if(isVector){
-					Debug.Log ("true");
-					//Vector3 data = new Vector3(tempx, tempy, tempz);
-				}else if(!isVector){
-					Debug.Log ("but why");
-					
-					//Quaternion data = new Quaternion(tempx, tempy, tempz, tempw);
-				}
-				*/
 
 				Debug.Log("Incoming message event received x:" + tempx +" y:"+ tempy +" z:"+ tempz +" w:"+ tempw);
 				DebugConsole.Log("Incoming message event received x:" + tempx +" y:"+ tempy +" z:"+ tempz +" w:"+ tempw);
@@ -253,12 +174,17 @@ public class NetMan1 : MonoBehaviour {
 				break;
 		}
 
+		// Modify Transport's transform
+		// Keep height (y) constant at 1.72
         dataV.y = 1.72f;
+		// Update transform's position
         transform.position = dataV;
    
         Vector3 dataEuler = dataQ.eulerAngles;
+		// Keep only y angle rotation
         dataEuler.x = dataEuler.z = 0f;
         dataQ = Quaternion.Euler(dataEuler);
+		// Update transform's rotation
         transform.rotation = dataQ;
         
     }

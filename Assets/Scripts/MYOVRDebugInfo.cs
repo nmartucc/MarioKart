@@ -51,9 +51,9 @@ public class MYOVRDebugInfo : MonoBehaviour
 	GameObject resolutionEyeTexture;
     GameObject latencies;
     GameObject texts;
-	GameObject sensor1;
-	GameObject sensor2;
-	GameObject sensor3;
+	GameObject sensor1; // FRONT
+	GameObject sensor2; // LEFT
+	GameObject sensor3; // RIGHT 
 	GameObject warning1;
 	GameObject warning2;
 	GameObject warning3;
@@ -63,6 +63,7 @@ public class MYOVRDebugInfo : MonoBehaviour
 	double dist1 = double.PositiveInfinity;
 	double dist2 = double.PositiveInfinity;
 	double dist3 = double.PositiveInfinity;
+	// distance below which warning displayed, in meters
 	double mindist = 1;
 	double mindistFront = 2;
 
@@ -263,6 +264,7 @@ public class MYOVRDebugInfo : MonoBehaviour
 				showWarning3 ();
 			}
 
+			// if any of the distaces are below the minimums, display the caution image
 			if ((dist1 < mindistFront || dist2 < mindist || dist3 < mindist) && riftPresentTimeout < 0.0f) {
 				initImage = true;
 				showImg = true;
@@ -330,6 +332,7 @@ public class MYOVRDebugInfo : MonoBehaviour
 
     #region Private Functions
 
+	// Caution image
 	void showImage(){
 		img = new GameObject();
 		img.name = "Image";
@@ -481,12 +484,14 @@ public class MYOVRDebugInfo : MonoBehaviour
 
 	void UpdateSensors(){
 		while (shouldexit == false) {
+			// Read line from Arduino
             double[] dist = PortMan.Read();
             if (dist != null)
             {
                 double distance1 = dist[0] / 100;
                 double distance2 = dist[2] / 100;
                 double distance3 = dist[1] / 100;
+				// Update respective sensors with distance data
                 UpdateSensor1(distance1);
                 UpdateSensor2(distance2);
                 UpdateSensor3(distance3);

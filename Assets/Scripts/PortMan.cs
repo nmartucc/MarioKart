@@ -26,15 +26,18 @@ public class PortMan : MonoBehaviour {
         {
             try
             {
+				// Clear buffer
                 sPort.DiscardInBuffer();
                 string rawData = sPort.ReadLine();
                 if (rawData.Length > 2)
                 {
                     char delimiter = ',';
+					// Spit into array of Strings using ',' as the delimiter
                     string[] distancestrings = rawData.Split(delimiter);
                     dist = new double[distancestrings.Length];
                     for (int i = 0; i < distancestrings.Length - 1; i++)
-                    {   //converts each string in the array to a double
+                    {   
+						// converts each string to a double
                         dist[i] = double.Parse(distancestrings[i]);
                     }
                 }
