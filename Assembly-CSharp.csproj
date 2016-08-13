@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\AudioController.cs" />
      <Compile Include="Assets\DebugWindow.cs" />
-     <Compile Include="Assets\KartController.cs" />
      <Compile Include="Assets\OVR\Moonlight\Scripts\OVRDebugHeadController.cs" />
      <Compile Include="Assets\OVR\Moonlight\Scripts\OVROverlay.cs" />
      <Compile Include="Assets\OVR\Moonlight\Scripts\OVRPlatformMenu.cs" />
@@ -73,7 +72,6 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRGamepadController.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRGridCube.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRPlayerController.cs" />
-     <Compile Include="Assets\OVR\Scripts\Util\OVRPlayerController2.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRPlayerControllerVanilla.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRSceneSampleController.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
@@ -86,14 +84,15 @@
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\DebugConsole.cs" />
+     <Compile Include="Assets\Scripts\KartController.cs" />
      <Compile Include="Assets\Scripts\MYOVRDebugInfo.cs" />
      <Compile Include="Assets\Scripts\NetMan1.cs" />
+     <Compile Include="Assets\Scripts\OVRPlayerController2.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PortMan.cs" />
      <Compile Include="Assets\Utils.cs" />
      <Compile Include="Assets\WebCamStreamer.cs" />
      <Compile Include="Assets\rotate.cs" />
-     <Compile Include="Assets\sPortMan.cs" />
      <None Include="Assets\ProCore\ProBuilder\Shader\pb_TransparentOverlay.shader" />
      <None Include="Assets\ProCore\ProBuilder\API Examples\Icosphere FFT\README.txt" />
      <None Include="Assets\ProCore\ProBuilder\About\changelog.txt" />

@@ -29,36 +29,6 @@ using System.Collections.Generic;
 public class OVRPlayerController2 : MonoBehaviour
 {
 	/// <summary>
-	/// The rate acceleration during movement.
-	/// </summary>
-	public float Acceleration = 0.1f;
-
-	/// <summary>
-	/// The rate of damping on movement.
-	/// </summary>
-	public float Damping = 0.3f;
-
-	/// <summary>
-	/// The rate of additional damping when moving sideways or backwards.
-	/// </summary>
-	public float BackAndSideDampen = 0.5f;
-
-	/// <summary>
-	/// The force applied to the character when jumping.
-	/// </summary>
-	public float JumpForce = 0.3f;
-
-	/// <summary>
-	/// The rate of rotation when using a gamepad.
-	/// </summary>
-	public float RotationAmount = 1.5f;
-
-	/// <summary>
-	/// The rate of rotation when using the keyboard.
-	/// </summary>
-	public float RotationRatchet = 45.0f;
-
-	/// <summary>
 	/// If true, reset the initial yaw of the player controller when the Hmd pose is recentered.
 	/// </summary>
 	public bool HmdResetsY = true;
@@ -68,11 +38,6 @@ public class OVRPlayerController2 : MonoBehaviour
 	/// </summary>
 	public bool HmdRotatesY = true;
 
-	/// <summary>
-	/// Modifies the strength of gravity.
-	/// </summary>
-	public float GravityModifier = 0.379f;
-	
 	/// <summary>
 	/// If true, each OVRPlayerController will use the player's physical height.
 	/// </summary>
@@ -182,7 +147,9 @@ public class OVRPlayerController2 : MonoBehaviour
 
         //Vector3 dataEuler = Vector3.zero;
 		//dataEuler.x = dataEuler.z = 0f;
-		//Quaternion dataQ = Quaternion.Euler (dataEuler); 
+		//Quaternion dataQ = Quaternion.Euler (dataEuler);
+
+		// Set rotation to zero so the OVRPlayerController always faces the front of the kart
 		Quaternion dataQ = Quaternion.identity;
 		transform.rotation = dataQ;
 		

@@ -15,7 +15,7 @@ public class NetMan1 : MonoBehaviour {
 	public int maxConnections = 10;
 	public int socketId;
 	public int socketPort = 8888;
-	public string ipAddress = "169.254.169.175";
+	public string ipAddress = "192.168.173.150";
 	public int connectionId;
 	public int bufferSize = 1024;
 
