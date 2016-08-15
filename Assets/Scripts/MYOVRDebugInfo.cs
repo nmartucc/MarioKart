@@ -63,7 +63,8 @@ public class MYOVRDebugInfo : MonoBehaviour
 	public Image mushroom;
     #endregion
 
-	double dist1 = 0;//double.PositiveInfinity;
+    public static double[] sensordata;
+	double dist1 = double.PositiveInfinity;
 	double dist2 = double.PositiveInfinity;
 	double dist3 = double.PositiveInfinity;
 	// distance below which warning displayed, in meters
@@ -398,7 +399,7 @@ public class MYOVRDebugInfo : MonoBehaviour
 		item = new GameObject();
 		item.name = "Item";
 		item.transform.parent = GameObject.Find("ItemManager").transform;
-		item.transform.localPosition = new Vector3(-500.0f, 140.0f, 0.0f);
+		item.transform.localPosition = new Vector3(-200.0f, 100.0f, 0.0f);
 		item.transform.localEulerAngles = Vector3.zero;
 		item.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
 
@@ -552,13 +553,17 @@ public class MYOVRDebugInfo : MonoBehaviour
             double[] dist = PortMan.Read();
             if (dist != null)
             {
+                sensordata = dist;
                 double distance1 = dist[0] / 100;
                 double distance2 = dist[2] / 100;
                 double distance3 = dist[1] / 100;
 				// Update respective sensors with distance data
-                UpdateSensor1(distance1);
-                UpdateSensor2(distance2);
-                UpdateSensor3(distance3);
+                if (distance1 != 0)
+                    UpdateSensor1(distance1);
+                if (distance2 != 0)
+                    UpdateSensor2(distance2);
+                if (distance3 != 0)
+                    UpdateSensor3(distance3);
             }
 		}
 	}

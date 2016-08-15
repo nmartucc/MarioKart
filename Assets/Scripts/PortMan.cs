@@ -35,7 +35,7 @@ public class PortMan : MonoBehaviour {
 					// Spit into array of Strings using ',' as the delimiter
                     string[] distancestrings = rawData.Split(delimiter);
                     dist = new double[distancestrings.Length];
-                    for (int i = 0; i < distancestrings.Length - 1; i++)
+                    for (int i = 0; i < distancestrings.Length; i++)
                     {   
 						// converts each string to a double
                         dist[i] = double.Parse(distancestrings[i]);

@@ -4,20 +4,36 @@ using System.IO.Ports;
 
 public class KartController : MonoBehaviour {
 
-	private bool showItem = false;
+	private bool hasItem = false;
+    private bool usingMush = false;
 	// Percent of max allowed speed
 	private static int speed = 100;
+
+    void Update()
+    {
+        if (hasItem)
+        {
+            double[] data = MYOVRDebugInfo.sensordata;
+            if (data[6] == 1)
+            {
+                hasItem = false;
+              MYOVRDebugInfo.showMushroom = false;
+                StartCoroutine(useMush());
+            }
+        }
+    }
 
 	void OnTriggerEnter(Collider other) 
 	{
 		// When entering off road collider, lower max speed
-		if (other.gameObject.CompareTag ("Off Road")) {
+		if (other.gameObject.CompareTag ("Off Road") && !usingMush) {
 			speed = 50;
 			// Send speed to Arduino
             PortMan.Write(speed);
         }
 		else if (other.gameObject.CompareTag ("Item Box")) {
-			showItem = true;
+			hasItem = true;
+            MYOVRDebugInfo.showMushroom = true;
 			StartCoroutine (respawn (other, 7));
 		}
 	}
@@ -39,5 +55,17 @@ public class KartController : MonoBehaviour {
 		yield return new WaitForSeconds(respawnTime);
 		obj.gameObject.SetActive (true);
 	}
+
+    IEnumerator useMush()
+    {
+        usingMush = true;
+        speed = 125;
+        PortMan.Write(speed);
+        yield return new WaitForSeconds(3);
+        speed = 100;
+        PortMan.Write(speed);
+        usingMush = false;
+        
+    }
 
 }
