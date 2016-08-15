@@ -61,7 +61,7 @@ public class KartController : MonoBehaviour {
         usingMush = true;
         speed = 125;
         PortMan.Write(speed);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         speed = 100;
         PortMan.Write(speed);
         usingMush = false;

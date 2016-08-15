@@ -4,7 +4,7 @@ using System.IO.Ports;
 
 public class PortMan : MonoBehaviour {
 
-    public static SerialPort sPort = new SerialPort("COM8", 115200);
+    public static SerialPort sPort = new SerialPort("COM9", 115200);
 
     void Start()
     {
