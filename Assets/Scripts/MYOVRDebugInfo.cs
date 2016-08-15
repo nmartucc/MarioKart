@@ -37,8 +37,10 @@ public class MYOVRDebugInfo : MonoBehaviour
     GameObject debugUIManager;
     GameObject debugUIObject;
 	GameObject img;
+	GameObject item;
 	GameObject warn;
 	GameObject imgManager;
+	GameObject itemManager;
 	GameObject warning1Manager;
 	GameObject warning2Manager;
 	GameObject warning3Manager;
@@ -58,9 +60,10 @@ public class MYOVRDebugInfo : MonoBehaviour
 	GameObject warning2;
 	GameObject warning3;
 	public Image caution;
+	public Image mushroom;
     #endregion
 
-	double dist1 = double.PositiveInfinity;
+	double dist1 = 0;//double.PositiveInfinity;
 	double dist2 = double.PositiveInfinity;
 	double dist3 = double.PositiveInfinity;
 	// distance below which warning displayed, in meters
@@ -99,6 +102,9 @@ public class MYOVRDebugInfo : MonoBehaviour
 	bool initImage = false;
 	bool isInitedImage = false;
 
+	bool initItem = false;
+	bool isInitedItem = false;
+
 	bool initWarning1 = false;
 	bool isInitedWarning1 = false;
 
@@ -126,6 +132,9 @@ public class MYOVRDebugInfo : MonoBehaviour
 	bool showWarn1 = false;
 	bool showWarn2 = false;
 	bool showWarn3 = false;
+	bool showIt = false;
+
+	public static bool showMushroom = false;
 
 	int sensorCount;
 
@@ -144,6 +153,10 @@ public class MYOVRDebugInfo : MonoBehaviour
 		imgManager = new GameObject ();
 		imgManager.name = "ImageManager";
 		imgManager.transform.parent = GameObject.Find("LeftEyeAnchor").transform;
+
+		itemManager = new GameObject ();
+		itemManager.name = "ItemManager";
+		itemManager.transform.parent = GameObject.Find("LeftEyeAnchor").transform;
 
 		warning1Manager = new GameObject ();
 		warning1Manager.name = "Warning1Manager";
@@ -176,6 +189,16 @@ public class MYOVRDebugInfo : MonoBehaviour
 		Canvas imgCanvas = imgManager.AddComponent<Canvas>();
 		imgCanvas.renderMode = RenderMode.WorldSpace;
 		imgCanvas.pixelPerfect = false;
+
+		RectTransform itemRectTransform = itemManager.AddComponent<RectTransform>();
+		itemRectTransform.sizeDelta = new Vector2(100f, 100f);
+		itemRectTransform.localScale = new Vector3(0.001f, 0.001f, 0.001f);
+		itemRectTransform.localPosition = new Vector3(0.01f, 0.17f, 0.53f);
+		itemRectTransform.localEulerAngles = Vector3.zero;
+
+		Canvas itemCanvas = itemManager.AddComponent<Canvas>();
+		itemCanvas.renderMode = RenderMode.WorldSpace;
+		itemCanvas.pixelPerfect = false;
 
 		RectTransform w1RectTransform = warning1Manager.AddComponent<RectTransform>();
 		w1RectTransform.sizeDelta = new Vector2(100f, 100f);
@@ -252,6 +275,10 @@ public class MYOVRDebugInfo : MonoBehaviour
 				showImage ();
 			}
 
+			if (initItem && !isInitedItem) {
+				showItem ();
+			}
+
 			if (initWarning1 && !isInitedWarning1) {
 				showWarning1 ();
 			}
@@ -297,6 +324,14 @@ public class MYOVRDebugInfo : MonoBehaviour
 				showWarn3 = false;
 			}
 
+			if (showMushroom) {
+				initItem = true;
+				showIt = true;
+			} else {
+				initItem = false;
+				showIt = false;
+			}
+
 			if (showWarn1) {
 				warning1Manager.SetActive (true);
 			} else
@@ -317,6 +352,11 @@ public class MYOVRDebugInfo : MonoBehaviour
 			} else
 				imgManager.SetActive (false);
 
+			if (showIt) {
+				itemManager.SetActive (true);
+			} else
+				itemManager.SetActive (false);
+
 		}
     }
 
@@ -327,6 +367,7 @@ public class MYOVRDebugInfo : MonoBehaviour
     {
         isInited = false;
 		isInitedImage = false;
+		isInitedItem = false;
     }
     #endregion
 
@@ -349,6 +390,29 @@ public class MYOVRDebugInfo : MonoBehaviour
 
 		initImage = false;
 		isInitedImage = true;
+
+	}
+
+	// Item image
+	void showItem(){
+		item = new GameObject();
+		item.name = "Item";
+		item.transform.parent = GameObject.Find("ItemManager").transform;
+		item.transform.localPosition = new Vector3(-500.0f, 140.0f, 0.0f);
+		item.transform.localEulerAngles = Vector3.zero;
+		item.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+
+		item.AddComponent<Image> ();
+		// If the item is a mushroom
+		if (showMushroom) {
+			item.GetComponent<Image> ().sprite = mushroom.sprite;
+			Color c = mushroom.color;
+			c.a = 0.8f;
+			item.GetComponent<Image> ().color = c;
+		}
+
+		initItem = false;
+		isInitedItem = true;
 
 	}
 

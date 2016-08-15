@@ -46,18 +46,9 @@ public class OVRPlayerController2 : MonoBehaviour
 	protected CharacterController Controller = null;
 	protected OVRCameraRig CameraRig = null;
 
-	private float MoveScale = 1.0f;
-	private Vector3 MoveThrottle = Vector3.zero;
-	private float FallSpeed = 0.0f;
 	private OVRPose? InitialPose;
 	private float InitialYRotation = 0.0f;
-	private float MoveScaleMultiplier = 1.0f;
-	private float RotationScaleMultiplier = 1.0f;
-	private bool  SkipMouseRotation = false;
 	private bool  HaltUpdateMovement = false;
-	private bool prevHatLeft = false;
-	private bool prevHatRight = false;
-	private float SimulationRate = 60f;
 
 	void Start()
 	{
