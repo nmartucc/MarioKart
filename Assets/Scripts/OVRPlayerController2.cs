@@ -136,12 +136,10 @@ public class OVRPlayerController2 : MonoBehaviour
 		if (HaltUpdateMovement)
 			return;
 
-        //Vector3 dataEuler = Vector3.zero;
-		//dataEuler.x = dataEuler.z = 0f;
-		//Quaternion dataQ = Quaternion.Euler (dataEuler);
-
-		// Set rotation to zero so the OVRPlayerController always faces the front of the kart
-		Quaternion dataQ = Quaternion.identity;
+        // Set rotation to zero so the OVRPlayerController always faces the front of the kart
+        Vector3 dataEuler = Vector3.zero;
+		dataEuler.x = dataEuler.z = 0f;
+        Quaternion dataQ = Quaternion.Euler (dataEuler);
 		transform.rotation = dataQ;
 		
 	}

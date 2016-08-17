@@ -4,7 +4,7 @@ using System.IO.Ports;
 
 public class KartController : MonoBehaviour {
 
-	private bool hasItem = false;
+    private bool hasItem = false;
     private bool usingMush = false;
 	// Percent of max allowed speed
 	private static int speed = 100;

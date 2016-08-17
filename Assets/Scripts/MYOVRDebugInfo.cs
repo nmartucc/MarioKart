@@ -68,8 +68,8 @@ public class MYOVRDebugInfo : MonoBehaviour
 	double dist2 = double.PositiveInfinity;
 	double dist3 = double.PositiveInfinity;
 	// distance below which warning displayed, in meters
-	double mindist = 1;
-	double mindistFront = 2;
+	double mindist = 0.5;
+	double mindistFront = 1.5;
 
     #region Debug strings
 	string strRiftPresent            = null; // "VR DISABLED"
@@ -399,9 +399,9 @@ public class MYOVRDebugInfo : MonoBehaviour
 		item = new GameObject();
 		item.name = "Item";
 		item.transform.parent = GameObject.Find("ItemManager").transform;
-		item.transform.localPosition = new Vector3(-200.0f, 100.0f, 0.0f);
+		item.transform.localPosition = new Vector3(-180.0f, 30.0f, 0.0f);
 		item.transform.localEulerAngles = Vector3.zero;
-		item.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+		item.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
 		item.AddComponent<Image> ();
 		// If the item is a mushroom
