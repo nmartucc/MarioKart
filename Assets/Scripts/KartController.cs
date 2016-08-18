@@ -13,11 +13,13 @@ public class KartController : MonoBehaviour {
     {
         if (hasItem)
         {
+			// grab button data from Arduino
             double[] data = MYOVRDebugInfo.sensordata;
+			// if button is pressed
             if (data[6] == 1)
             {
                 hasItem = false;
-              MYOVRDebugInfo.showMushroom = false;
+             	MYOVRDebugInfo.showMushroom = false;
                 StartCoroutine(useMush());
             }
         }
@@ -25,7 +27,7 @@ public class KartController : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) 
 	{
-		// When entering off road collider, lower max speed
+		// When entering off road collider, lower max speed unless mushroom is being used
 		if (other.gameObject.CompareTag ("Off Road") && !usingMush) {
 			speed = 50;
 			// Send speed to Arduino
@@ -56,6 +58,7 @@ public class KartController : MonoBehaviour {
 		obj.gameObject.SetActive (true);
 	}
 
+	// increases max speed for 2 seconds
     IEnumerator useMush()
     {
         usingMush = true;
